@@ -26,22 +26,22 @@ public class FirstPersonController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Rotation
+		//Rotation or Left/Right Viewpoint -- rotates character about the Y axis
 		float rotLeftRight = Input.GetAxis("Mouse X") * MouseSensitivity;
 		transform.Rotate(0,rotLeftRight,0);
 
+		// Up/Down Viewpoint -- rotates camera about the X axis
 		verticalRotation -= Input.GetAxis("Mouse Y") * MouseSensitivity;
 		verticalRotation = Mathf.Clamp (verticalRotation, -UpDownRange, UpDownRange);
-		
 		Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation,0,0);
 
 		// Sprint?
 		if(Input.GetButton("Sprint")){
 			sprintFactor = SprintMultiplier;
 		} else {
+			// for slowly bringing the speed back to normal instead of abruptly
 			if(sprintFactor > 1.0f){
 				sprintFactor -= 0.01f;
-				Debug.Log(sprintFactor);
 			}
 		}
 	
@@ -49,6 +49,7 @@ public class FirstPersonController : MonoBehaviour {
 		float forwardSpeed = Input.GetAxis("Vertical") * MovementSpeed * sprintFactor;
 		float sideSpeed = Input.GetAxis("Horizontal") * MovementSpeed;
 
+		// applies gravity to player
 		verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
 		// jumping
@@ -56,9 +57,9 @@ public class FirstPersonController : MonoBehaviour {
 			verticalVelocity = JumpSpeed;
 		}
 
+		// the actual player moving
 		Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 		speed = transform.rotation * speed;
-
 		cc.Move(speed * Time.deltaTime);
 
 	}
