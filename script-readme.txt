@@ -7,3 +7,6 @@ SprintMultiplier	// what factor to multiply your movement speed times for sprint
 MouseSensitivity	// the speed at which your mouse movement affects your viewpoint
 UpDownRange			// the angle you want to limit your upwards and downwards viewpoint (IE you can't look directly down or directly up)
 JumpSpeed			// how high your jump is
+
+Credits
+Fire SFX Loop: http://www.freesfx.co.uk
