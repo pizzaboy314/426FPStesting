@@ -1,0 +1,38 @@
+>importing
+1. Drag and drop like usual, u probably want to group select the texture images here too
+2. then u clcik the model u dragged in (in the Assets or whatever folder)
+3. set "animation type" to humanoid and apply
+4. Then to the animations tab
+5. You need to select each "clip" and mark checkbox "loop"
+6. Also go to "Model" tab and set scale factor to 1
+otherwise when u put the model into teh scene it'll be too
+small
+NOTE: the factor affect models already dropped into the scene also
+
+>attach animation to model
+6. drag and drop the model into the scene
+7. click the drop down on the model in the assets fold (not the hierachy tab)
+8. select the animations ("idle", "walk","run") and drag onto the model in
+the scene (or into the heiarchy)
+9. click the model in the scene and double clcik the controller (mine is named
+"leslie" just like the model). This shoudl open ouht the "Animator" tab
+NOTE: Orange means default action, shows be running when u drag the model into the scene
+
+
+NOTE2: If there another model with a humanoid rig, u can take these animation and do the same
+with them (i belive, from what i've tried)
+BUT THEY MUST HAVE THE SAME MODEL ORIENTATION (T-POSE)
+otherwise when u give the other model this one's animation, it'll be off
+
+>tweaking (in animator controller)
+1. right click, Make transition, left click where to (eg idle to walk AND  vice versa and etc.)
+2. create a new Parameter (the plus symbol bot right next to "Parameter") 
+(speed float, isWalking bool, whatever you want) u modify these in scrpit
+3. click on the white transition arrow that you've made (scrolling down is the Inspector)
+and change Exit Time with whatever u made in step 2 and change the conditions
+4. tweak the (blue) arrows above a timeline (just above the "Conditions" section) to
+ make the transition smoother (the preview shows the transition)
+4. change exit time to whatever u made in step 2
+
+
+
