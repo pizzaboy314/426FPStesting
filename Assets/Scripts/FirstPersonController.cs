@@ -11,6 +11,7 @@ public class FirstPersonController : MonoBehaviour {
 	private float verticalRotation;
 	private float verticalVelocity;
 	private float sprintFactor;
+	private bool jumping;
 
 	CharacterController cc;
 
@@ -21,6 +22,7 @@ public class FirstPersonController : MonoBehaviour {
 		verticalRotation = 0f;
 		verticalVelocity = 0f;
 		sprintFactor = 1.0f;
+		jumping = false;
 		Screen.lockCursor = true;
 	}
 	
@@ -50,17 +52,30 @@ public class FirstPersonController : MonoBehaviour {
 		float sideSpeed = Input.GetAxis("Horizontal") * MovementSpeed;
 
 		// applies gravity to player
-		verticalVelocity += Physics.gravity.y * Time.deltaTime;
+		if(!cc.isGrounded){
+			verticalVelocity += Physics.gravity.y * Time.deltaTime;
+		}
 
 		// jumping
 		if(Input.GetButtonDown("Jump") && cc.isGrounded){
 			verticalVelocity = JumpSpeed;
+			jumping = true;
+			move(sideSpeed, verticalVelocity, forwardSpeed);
+		} else if (cc.isGrounded && jumping == false){
+			verticalVelocity = 0f;
+			jumping = false;
+			move(sideSpeed, verticalVelocity, forwardSpeed);
+		} else {
+			move(sideSpeed, verticalVelocity, forwardSpeed);
 		}
 
-		// the actual player moving
+
+	}
+
+	// the actual player moving
+	public void move(float sideSpeed, float verticalVelocity, float forwardSpeed){
 		Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
 		speed = transform.rotation * speed;
 		cc.Move(speed * Time.deltaTime);
-
 	}
 }
