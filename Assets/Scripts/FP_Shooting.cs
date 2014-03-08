@@ -6,16 +6,24 @@ public class FP_Shooting : MonoBehaviour {
 	public GameObject thermal_det;
 	public float detImpulse;
 
-	public float range = 100f;
+	public GameObject debrisPrefab;
 
+	public GameObject weapon;
 	public float cooldown = 0.2f;
 	private float cooldownRemaining = 0;
 
-	public GameObject debrisPrefab;
+	private float raycastRange = 100f;
+	private Camera cam;
+	private Vector3 weaponLoc;
+	
 
 	// Use this for initialization
 	void Start () {
-		detImpulse = 50.0f;
+		cam = Camera.main;
+		weaponLoc = new Vector3(0.3f, -0.3f, 0.6f);
+		Quaternion rotation = new Quaternion(cam.transform.rotation.x,cam.transform.rotation.y-180f,cam.transform.rotation.z,cam.transform.rotation.w); 
+		GameObject gun = (GameObject)Instantiate(weapon, cam.transform.position + weaponLoc, rotation);
+		gun.transform.parent = cam.transform;
 	}
 	
 	// Update is called once per frame
@@ -26,7 +34,7 @@ public class FP_Shooting : MonoBehaviour {
 			Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 			RaycastHit hitInfo;
 
-			if(Physics.Raycast(ray, out hitInfo, range)){
+			if(Physics.Raycast(ray, out hitInfo, raycastRange)){
 				Vector3 hitPoint = hitInfo.point;
 				if(debrisPrefab != null){
 					Instantiate(debrisPrefab, hitPoint, Quaternion.identity);
