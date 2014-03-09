@@ -15,15 +15,23 @@ public class FP_Shooting : MonoBehaviour {
 	private float raycastRange = 100f;
 	private Camera cam;
 	private Vector3 weaponLoc;
+
+	private LineRenderer laser;
 	
 
 	// Use this for initialization
 	void Start () {
 		cam = Camera.main;
-		weaponLoc = new Vector3(0.3f, -0.3f, 0.6f);
+		weaponLoc = new Vector3(0.3f, -0.33f, 0.6f);
 		Quaternion rotation = new Quaternion(cam.transform.rotation.x,cam.transform.rotation.y-180f,cam.transform.rotation.z,cam.transform.rotation.w); 
 		GameObject gun = (GameObject)Instantiate(weapon, cam.transform.position + weaponLoc, rotation);
 		gun.transform.parent = cam.transform;
+
+		//laser = gun.GetComponent<LineRenderer> ();
+		//laser.SetPosition (0, gun.transform.position + gun.transform.forward);
+		//laser.SetPosition (1, new Vector3 (gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3));
+
+
 	}
 	
 	// Update is called once per frame
