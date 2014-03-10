@@ -9,6 +9,7 @@ public class FP_Shooting : MonoBehaviour {
 	public GameObject debrisPrefab;
 
 	public GameObject weapon;
+	private GameObject currWeapon;
 	public float cooldown = 0.2f;
 	private float cooldownRemaining = 0;
 
@@ -24,12 +25,15 @@ public class FP_Shooting : MonoBehaviour {
 		cam = Camera.main;
 		weaponLoc = new Vector3(0.3f, -0.33f, 0.6f);
 		Quaternion rotation = new Quaternion(cam.transform.rotation.x,cam.transform.rotation.y-180f,cam.transform.rotation.z,cam.transform.rotation.w); 
-		GameObject gun = (GameObject)Instantiate(weapon, cam.transform.position + weaponLoc, rotation);
-		gun.transform.parent = cam.transform;
 
-		//laser = gun.GetComponent<LineRenderer> ();
-		//laser.SetPosition (0, gun.transform.position + gun.transform.forward);
-		//laser.SetPosition (1, new Vector3 (gun.transform.position.x, gun.transform.position.y, gun.transform.position.z + 3));
+		currWeapon = (GameObject)Instantiate(weapon, cam.transform.position + weaponLoc, rotation);
+		currWeapon.transform.parent = cam.transform;
+
+		laser = currWeapon.GetComponent<LineRenderer> ();
+		Vector3 gunTip = new Vector3 (currWeapon.transform.position.x, currWeapon.transform.position.y + 0.07f, currWeapon.transform.position.z + 0.13f);
+
+		laser.SetPosition (0, gunTip);
+		laser.SetPosition (1, new Vector3 (currWeapon.transform.position.x, currWeapon.transform.position.y + 0.07f, currWeapon.transform.position.z + 5));
 
 
 	}
