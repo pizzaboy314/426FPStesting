@@ -30,10 +30,8 @@ public class FP_Shooting : MonoBehaviour {
 		currWeapon.transform.parent = cam.transform;
 
 		laser = currWeapon.GetComponent<LineRenderer> ();
-		Vector3 gunTip = new Vector3 (currWeapon.transform.position.x, currWeapon.transform.position.y + 0.07f, currWeapon.transform.position.z + 0.13f);
+		laser.enabled = false;
 
-		laser.SetPosition (0, gunTip);
-		laser.SetPosition (1, new Vector3 (currWeapon.transform.position.x, currWeapon.transform.position.y + 0.07f, currWeapon.transform.position.z + 5));
 
 
 	}
@@ -46,14 +44,26 @@ public class FP_Shooting : MonoBehaviour {
 			Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 			RaycastHit hitInfo;
 
+			//Vector3 gunTip = new Vector3 (currWeapon.transform.position.x, currWeapon.transform.position.y + 0.07f, currWeapon.transform.position.z + 0.13f);
+			Transform spawnPoint = currWeapon.transform.Find("laserSpawn");
+			Vector3 gunTip = spawnPoint.position;
+
+			laser.enabled = true;
+			laser.SetPosition (0, gunTip); 
+			laser.SetPosition(1, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 12.0f)));
+
+
 			if(Physics.Raycast(ray, out hitInfo, raycastRange)){
 				Vector3 hitPoint = hitInfo.point;
 				if(debrisPrefab != null){
 					Instantiate(debrisPrefab, hitPoint, Quaternion.identity);
 				}
+				laser.SetPosition(1, hitPoint);
 
-				GameObject obj = hitInfo.collider.gameObject;
-				Debug.Log(obj.tag);
+				//GameObject obj = hitInfo.collider.gameObject;
+				//Debug.Log(obj.tag);
+			} else {
+				laser.SetPosition(1, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 12.0f)));
 			}
 		}
 
