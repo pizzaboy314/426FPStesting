@@ -70,7 +70,7 @@ public class FirstPersonController2 : MonoBehaviour
 		
 		// On standalone builds, walk/run speed is modified by a key press.
 		// We select appropriate speed based on whether we're walking by default, and whether the walk/run toggle button is pressed:
-		bool walkOrRun =  Input.GetKey(KeyCode.LeftShift);
+		bool walkOrRun =  Input.GetButton("Sprint");
 		speed = walkByDefault ? (walkOrRun ? runSpeed : walkSpeed) : (walkOrRun ? walkSpeed : runSpeed);
 		
 		// On mobile, it's controlled in analogue fashion by the v input value, and therefore needs no special handling.

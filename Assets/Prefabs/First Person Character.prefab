@@ -271,7 +271,7 @@ MonoBehaviour:
   strafeSpeed: 4
   jumpPower: 5
   walkByDefault: 1
-  walkSpeed: 3
+  walkSpeed: 5
   advanced:
     gravityMultiplier: 1
     zeroFrictionMaterial: {fileID: 0}

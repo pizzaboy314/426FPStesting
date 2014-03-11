@@ -18,6 +18,12 @@ public class FP_Shooting : MonoBehaviour {
 	private Vector3 weaponLoc;
 
 	private LineRenderer laser;
+	private Vector3 start;
+	private Vector3 end;
+	private float animCounter;
+	private float animDist;
+	private float animDrawSpeed = 1f;
+	private bool firing;
 	
 
 	// Use this for initialization
@@ -26,12 +32,14 @@ public class FP_Shooting : MonoBehaviour {
 		weaponLoc = new Vector3(0.3f, -0.33f, 0.6f);
 		Quaternion rotation = new Quaternion(cam.transform.rotation.x,cam.transform.rotation.y-180f,cam.transform.rotation.z,cam.transform.rotation.w); 
 
+		Debug.Log (weapon.name);
+
 		currWeapon = (GameObject)Instantiate(weapon, cam.transform.position + weaponLoc, rotation);
 		currWeapon.transform.parent = cam.transform;
 
 		laser = currWeapon.GetComponent<LineRenderer> ();
 		laser.enabled = false;
-
+		animCounter = 0;
 
 
 	}
@@ -41,29 +49,47 @@ public class FP_Shooting : MonoBehaviour {
 		cooldownRemaining -= Time.deltaTime;
 
 		if(Input.GetButtonDown("Fire1") && cooldownRemaining <= 0){
+			currWeapon.audio.Play();
+
 			Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 			RaycastHit hitInfo;
 
-			//Vector3 gunTip = new Vector3 (currWeapon.transform.position.x, currWeapon.transform.position.y + 0.07f, currWeapon.transform.position.z + 0.13f);
-			Transform spawnPoint = currWeapon.transform.Find("laserSpawn");
-			Vector3 gunTip = spawnPoint.position;
+			Vector3 gunTip = currWeapon.transform.Find("laserSpawn").position;
+			start = gunTip;
 
 			laser.enabled = true;
-			laser.SetPosition (0, gunTip); 
-			laser.SetPosition(1, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 12.0f)));
-
+			animCounter = 0;
 
 			if(Physics.Raycast(ray, out hitInfo, raycastRange)){
+				if(hitInfo.collider.tag == "ThermalDet"){
+					thermal_det script = hitInfo.collider.GetComponent<thermal_det>();
+					script.Explode();
+				}
+
 				Vector3 hitPoint = hitInfo.point;
 				if(debrisPrefab != null){
 					Instantiate(debrisPrefab, hitPoint, Quaternion.identity);
 				}
-				laser.SetPosition(1, hitPoint);
+				end = hitPoint;
 
-				//GameObject obj = hitInfo.collider.gameObject;
-				//Debug.Log(obj.tag);
 			} else {
-				laser.SetPosition(1, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 12.0f)));
+				end = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 12.0f));
+			}
+			animDist = Vector3.Distance(start, end);
+		}
+
+		if (laser.enabled == true) {
+			if(animCounter <= animDist){
+				animCounter += .1f / animDrawSpeed;
+
+				float x = Mathf.Lerp(0, animDist, animCounter);
+
+				Vector3 pointAlongLine = x * Vector3.Normalize(end - start) + start;
+
+				laser.SetPosition(0, pointAlongLine);
+				laser.SetPosition(1, end);
+			} else {
+				laser.enabled = false;
 			}
 		}
 

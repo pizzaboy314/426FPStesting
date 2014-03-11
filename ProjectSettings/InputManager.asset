@@ -139,7 +139,7 @@ InputManager:
     negativeButton: 
     positiveButton: mouse 2
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: left shift
     gravity: 0
     dead: 0
     sensitivity: .100000001

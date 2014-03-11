@@ -27,7 +27,7 @@ public class thermal_det : MonoBehaviour {
 		}
 	}
 
-	void Explode(){
+	public void Explode(){
 		Instantiate (fireEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);
 	}
