@@ -6435,7 +6435,7 @@ GameObject:
   - 23: {fileID: 1271314576}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7238,6 +7238,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 09fe935739c5ecb48973dec7acc86d46, type: 2}
+      propertyPath: debrisPrefab
+      value: 
+      objectReference: {fileID: 100002, guid: f272a704ae2173743aeef0fc8ef0c03e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09fe935739c5ecb48973dec7acc86d46, type: 2}
   m_RootGameObject: {fileID: 2064648047}
@@ -8692,7 +8696,7 @@ GameObject:
   - 12: {fileID: 1763920680}
   - 26: {fileID: 1763920679}
   m_Layer: 0
-  m_Name: Dust Storm
+  m_Name: Dust1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9609,6 +9613,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 88324f760c579473199bfbc4f1073097, type: 2}
+      propertyPath: m_Name
+      value: Dust1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88324f760c579473199bfbc4f1073097, type: 2}
   m_RootGameObject: {fileID: 1763920678}
@@ -10219,7 +10227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thermal_det: {fileID: 100000, guid: d0dabadf11647e440801775b513b9120, type: 2}
   detImpulse: 20
-  debrisPrefab: {fileID: 0}
+  debrisPrefab: {fileID: 100002, guid: f272a704ae2173743aeef0fc8ef0c03e, type: 2}
   weapon: {fileID: 100012, guid: 3d87038c13f39e242bf82f8ad37fe0c7, type: 2}
   cooldown: .200000003
 --- !u!114 &2064648050

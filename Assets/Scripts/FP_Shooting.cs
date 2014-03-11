@@ -32,8 +32,6 @@ public class FP_Shooting : MonoBehaviour {
 		weaponLoc = new Vector3(0.3f, -0.33f, 0.6f);
 		Quaternion rotation = new Quaternion(cam.transform.rotation.x,cam.transform.rotation.y-180f,cam.transform.rotation.z,cam.transform.rotation.w); 
 
-		Debug.Log (weapon.name);
-
 		currWeapon = (GameObject)Instantiate(weapon, cam.transform.position + weaponLoc, rotation);
 		currWeapon.transform.parent = cam.transform;
 
@@ -79,7 +77,7 @@ public class FP_Shooting : MonoBehaviour {
 		}
 
 		if (laser.enabled == true) {
-			if(animCounter <= animDist){
+			if(animCounter < animDist){
 				animCounter += .1f / animDrawSpeed;
 
 				float x = Mathf.Lerp(0, animDist, animCounter);
