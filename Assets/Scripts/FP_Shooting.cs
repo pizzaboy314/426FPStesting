@@ -20,9 +20,10 @@ public class FP_Shooting : MonoBehaviour {
 	private LineRenderer laser;
 	private Vector3 start;
 	private Vector3 end;
-	private float animCounter;
+	private float animHeadCounter;
+	private float animTailCounter;
 	private float animDist;
-	private float animDrawSpeed = 1f;
+	private float animDrawSpeed = 0.2f;
 	private bool firing;
 	
 
@@ -37,7 +38,8 @@ public class FP_Shooting : MonoBehaviour {
 
 		laser = currWeapon.GetComponent<LineRenderer> ();
 		laser.enabled = false;
-		animCounter = 0;
+		animTailCounter = 0;
+		animHeadCounter = 0;
 
 
 	}
@@ -56,7 +58,8 @@ public class FP_Shooting : MonoBehaviour {
 			start = gunTip;
 
 			laser.enabled = true;
-			animCounter = 0;
+			animTailCounter = 0;
+			animHeadCounter = 0;
 
 			if(Physics.Raycast(ray, out hitInfo, raycastRange)){
 				if(hitInfo.collider.tag == "ThermalDet"){
@@ -77,15 +80,26 @@ public class FP_Shooting : MonoBehaviour {
 		}
 
 		if (laser.enabled == true) {
-			if(animCounter < animDist){
-				animCounter += .1f / animDrawSpeed;
+			if(animTailCounter < animDist){
+				animTailCounter += .1f / animDrawSpeed;
 
-				float x = Mathf.Lerp(0, animDist, animCounter);
+				float x = Mathf.Lerp(0, animDist, animTailCounter);
 
-				Vector3 pointAlongLine = x * Vector3.Normalize(end - start) + start;
+				Vector3 pointAlongLineFar = x * Vector3.Normalize(end - start) + start;
+				Vector3 pointAlongLineNear;
 
-				laser.SetPosition(0, pointAlongLine);
-				laser.SetPosition(1, end);
+				if(animTailCounter >= (animDist / ((2 * animDist) / 3))){
+					animHeadCounter += .1f / animDrawSpeed;
+					
+					float y = Mathf.Lerp(0, animDist, animHeadCounter);
+					
+					pointAlongLineNear = y * Vector3.Normalize(end - start) + start;
+				} else {
+					pointAlongLineNear = start;
+				}
+
+				laser.SetPosition(0, pointAlongLineNear);
+				laser.SetPosition(1, pointAlongLineFar);
 			} else {
 				laser.enabled = false;
 			}
