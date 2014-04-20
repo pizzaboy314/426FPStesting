@@ -1,0 +1,71 @@
+# Blender MTL File: 'column.blend'
+# Material Count: 7
+
+newmtl Metal_Aluminum_Anodized
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Bryan's_Data\\Media\\Unity\\CS426\\FPStesting\\Assets\\Models\\Sketchup\\Column2\\Metal_Aluminum_Anodized.jpg
+
+newmtl Metal_Embossed
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Bryan's_Data\\Media\\Unity\\CS426\\FPStesting\\Assets\\Models\\Sketchup\\Column2\\Metal_Embossed.jpg
+
+newmtl Metal_Panel
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Bryan's_Data\\Media\\Unity\\CS426\\FPStesting\\Assets\\Models\\Sketchup\\Column2\\Metal_Panel.jpg
+
+newmtl Metal_Steel_Textured
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Bryan's_Data\\Media\\Unity\\CS426\\FPStesting\\Assets\\Models\\Sketchup\\Column2\\Metal_Steel_Textured.jpg
+
+newmtl Stone_Granite_Midnite
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Bryan's_Data\\Media\\Unity\\CS426\\FPStesting\\Assets\\Models\\Sketchup\\Column2\\Stone_Granite_Midnite.jpg
+
+newmtl Stone_Marble
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Bryan's_Data\\Media\\Unity\\CS426\\FPStesting\\Assets\\Models\\Sketchup\\Column2\\Stone_Marble.jpg
+
+newmtl material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
